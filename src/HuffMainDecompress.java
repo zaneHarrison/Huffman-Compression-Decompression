@@ -2,14 +2,28 @@ import java.io.File;
 import java.io.*;
 
 public class HuffMainDecompress {
+	private final static String UNHUFF_EXTENSION = ".uhf";
+
+	private static String getDefaultFileName(String name) {
+		if (name.endsWith(".hf")) {
+			return name.substring(0,name.length()-3)+UNHUFF_EXTENSION;
+		}
+		return name + UNHUFF_EXTENSION;
+	}
 	public static void main(String[] args) {
 		
 		System.out.println("Huffman Decompress Main");
-		
-		File inf = FileSelector.selectFile();
-		File outf = FileSelector.saveFile();
-		if (inf == null || outf == null) {
-			System.err.println("input or output file cancelled");
+		System.out.println("Use FileDialog to choose file to decompress");
+		File inf = FileSelector.selectFile("file to decompress");
+		if (inf == null) {
+			System.err.println("input file cancelled");
+			return;
+		}
+		System.out.println("Use FileDialog to choose file name/directory for decompressed file");
+		String saveName = getDefaultFileName(inf.getName());
+		File outf = FileSelector.saveFile("decompressed file name",saveName);
+		if (outf == null) {
+			System.err.println("output file cancelled");
 			return;
 		}
 		BitInputStream bis = new BitInputStream(inf);
