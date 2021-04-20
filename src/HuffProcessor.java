@@ -60,6 +60,9 @@ public class HuffProcessor {
 		while (current != PSEUDO_EOF) {
 			freq[current]++;
 			current = in.readBits(BITS_PER_WORD);
+			if (current == -1) {
+				break;
+			}
 		}
 		return freq;
 	}
