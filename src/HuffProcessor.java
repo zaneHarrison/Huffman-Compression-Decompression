@@ -75,7 +75,7 @@ public class HuffProcessor {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
 			//What should t's value be??
-			HuffNode t = new HuffNode(null, left.myWeight + right.myWeight, left, right);
+			HuffNode t = new HuffNode(0, left.myWeight + right.myWeight, left, right);
 			pq.add(t);
 		}
 		HuffNode root = pq.remove();
