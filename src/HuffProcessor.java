@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.Arrays;
 
 /**
  * Although this class has a history of several years,
@@ -126,7 +125,8 @@ public class HuffProcessor {
 			String code = codings[current];
 			out.writeBits(code.length(), Integer.parseInt(code, 2));
 			current = in.readBits(BITS_PER_WORD);
-			if (current == PSEUDO_EOF) {
+			if (current == -1) {
+				code = codings[PSEUDO_EOF];
 				out.writeBits(code.length(), Integer.parseInt(code, 2));
 				break;
 			}
